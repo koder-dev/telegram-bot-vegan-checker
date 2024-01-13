@@ -1,14 +1,19 @@
 const { Telegraf } = require('telegraf');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
+const express = require('express')
 const dotenv = require('dotenv');
 dotenv.config()
 
+const app = express();
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const token = process.env.TELEGRAM_BOT_API_TOKEN;
 
 const model = genAI.getGenerativeModel({ model: "gemini-pro"});
 const bot = new Telegraf(token)
 
+app.get('/', (req, res) => {
+    res.send('Telegram bot is working')
+})
 bot.start((ctx) => ctx.reply('Вітаю.'))
 
 bot.command('quit', async (ctx) => {
@@ -23,3 +28,4 @@ bot.on('text', async (ctx) => {
 });
 
 bot.launch()
+app.listen(8000, () => console.log('Telegram bot is launch');)
