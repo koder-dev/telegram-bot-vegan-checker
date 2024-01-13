@@ -28,4 +28,4 @@ bot.on('text', async (ctx) => {
 });
 
 bot.launch()
-app.listen(8000, () => console.log('Telegram bot is launch');)
+app.listen(8000, () => console.log('Telegram bot is launch'))
